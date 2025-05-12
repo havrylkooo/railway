@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Наші працівники</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Банер */
+        .banner {
+            background: linear-gradient(90deg, #43a047, #2e7d32);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .logo-title img {
+            height: 90px;
+            width: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-title h1 {
+            font-size: 2.2rem;
+            margin: 0;
+        }
+
+        /* Меню */
+        .navbar {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 14px 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            transition: all 0.3s ease;
+            border-radius: 6px;
+        }
+
+        .navbar a:hover {
+            background-color: #e8f5e9;
+            color: #1b5e20;
+        }
+
+        /* Контент */
+        .content {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: auto;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        .content h2 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+        }
+
+        /* Картки працівників */
+        .employee-card {
+            background-color: #ffffff;
+            border-left: 6px solid #4caf50;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .employee-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        .employee-card h3 {
+            margin: 0;
+            color: #2e7d32;
+            font-size: 1.3rem;
+        }
+
+        .employee-card p {
+            margin: 8px 0 0;
+            font-size: 1rem;
+        }
+
+        /* Анімація */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Адаптивність */
+        @media (max-width: 600px) {
+            .logo-title {
+                flex-direction: column;
+                text-align: center;
+            }
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Банер -->
+<header class="banner">
+    <div class="logo-title">
+        <img src="/image/train.jpg" alt="Логотип">
+        <h1>Наші працівники</h1>
+    </div>
+</header>
+
+<!-- Меню -->
+<nav class="navbar">
+    <a th:href="@{/}">Головна</a>
+    <a th:href="@{/form}">Напрямки</a>
+    <a th:href="@{/employees}">Працівники</a>
+</nav>
+
+<!-- Контент -->
+<main class="content">
+    <h2>Наша команда</h2>
+
+    <div th:each="employee : ${employees}" class="employee-card">
+        <h3 th:text="${employee.name}">Ім’я працівника</h3>
+        <p><strong th:text="${employee.position}">Посада</strong></p>
+        <p th:text="${employee.description}">Опис</p>
+    </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Транспортна система</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+</head>
+<body>
+
+<!-- Банер -->
+<header class="banner">
+  <div class="logo-title">
+    <img src="/image/train.jpg" alt="Логотип" style="height: 90px; width: 90px; border-radius: 50%; object-fit: cover;">
+    <h1>Транспортна система</h1>
+  </div>
+</header>
+
+<!-- Навігація -->
+<!-- Верхнє меню -->
+<div class="navbar">
+  <a th:href="@{/}">Головна</a>
+  <a href="#directionsForm">Напрямки</a>
+</div>
+
+
+<!-- Контент -->
+<main class="content">
+  <section class="form-section">
+    <h2>Додати потяг</h2>
+    <form action="/addTrain" method="post" id="directionsForm">
+      <label>Кількість напрямків:
+        <select name="direction" required>
+          <option value="Київ-Львів">Київ-Львів</option>
+          <option value="Калуш-Дніпро">Калуш-Дніпро</option>
+          <option value="Крим-Сімферополь">Крим-Сімферополь</option>
+        </select>
+      </label>
+
+      <label>Тип вагона:
+        <input type="text" name="wagonType" required>
+      </label>
+
+      <label>Кількість вагонів:
+        <input type="number" name="wagonCount" required>
+      </label>
+
+      <label>Номери вагонів (через пробіл):
+        <input type="text" name="wagonNumbers" required>
+      </label>
+
+      <label>Час:
+        <input type="text" name="time" required>
+      </label>
+
+      <label>Виконавець:
+        <input type="text" name="executor" required>
+      </label>
+
+      <button type="submit">Надіслати</button>
+    </form>
+  </section>
+</main>
+
+<!-- Соціальні мережі -->
+<footer class="footer">
+  <p>© 2025 Транспортна система</p>
+</footer>
+
+</body>
+</html>

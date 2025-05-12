@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Звіт про потяги</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4CAF50, #2C9D29);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-size: 28px;
+            border-bottom: 5px solid #2C9D29;
+        }
+
+        .message {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .train-report {
+            max-width: 1000px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #fafafa;
+        }
+
+        tr:hover td {
+            background-color: #f1f1f1;
+        }
+
+        .train-report h3 {
+            font-size: 24px;
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 16px;
+            margin-top: 40px;
+            border-top: 5px solid #4CAF50;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        .icon {
+            font-size: 24px;
+            color: #4CAF50;
+            margin-right: 8px;
+        }
+
+        .train-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .train-card:hover {
+            transform: scale(1.03);
+        }
+
+        .train-card h4 {
+            color: #333;
+            font-size: 22px;
+        }
+
+        .train-card p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .home-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-link:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Банер -->
+<header>
+    <img src="/image/train.jpg" alt="Логотип" style="height: 90px; width: 90px; border-radius: 50%; object-fit: cover;">
+    <h1>Звіт про потяги</h1>
+
+</header>
+
+<!-- Повідомлення про успішне додавання -->
+<div class="message">
+    <h2 th:text="${message}">Дані успішно записано</h2>
+</div>
+
+<!-- Звіт про потяги -->
+<section class="train-report">
+    <h3>Дані про потяги</h3>
+
+    <div class="train-card">
+        <h4>Напрямок: <span th:text="${train.direction}"></span></h4>
+        <p><strong>Тип вагона:</strong> <span th:text="${train.wagonType}"></span></p>
+        <p><strong>Номери вагонів:</strong>
+        <ul>
+            <li th:each="wagon : ${train.wagonNumbers}" th:text="${wagon}"></li>
+        </ul>
+        </p>
+        <p><strong>Час:</strong> <span th:text="${train.time}"></span></p>
+        <p><strong>Виконавець:</strong> <span th:text="${train.executor}"></span></p>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Напрямок</th>
+            <th>Тип вагона</th>
+            <th>Номери вагонів</th>
+            <th>Час</th>
+            <th>Виконавець</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${train.direction}"></td>
+            <td th:text="${train.wagonType}"></td>
+            <td>
+                <ul>
+                    <li th:each="wagon : ${train.wagonNumbers}" th:text="${wagon}"></li>
+                </ul>
+            </td>
+            <td th:text="${train.time}"></td>
+            <td th:text="${train.executor}"></td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- Кнопка для повернення на головну сторінку -->
+<footer>
+    <p>Дякуємо, що обираєте нашу залізницю!</p>
+    <p>Щасливої дороги!</p>
+    <a class="home-link" href="/">Повернутися на головну</a>
+</footer>
+
+</body>
+</html>

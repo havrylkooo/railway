@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Звіт по поїздах</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        .message {
+            background-color: #dff0d8;
+            padding: 15px;
+            border-radius: 5px;
+            color: #3c763d;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .message p {
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .train-info {
+            margin-top: 30px;
+        }
+
+        .train-info h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Звіт по поїздах</h1>
+
+    <!-- Повідомлення про успішне додавання -->
+    <div class="message" th:if="${message != null}">
+        <p th:text="${message}"></p>
+    </div>
+
+    <div class="train-info">
+        <h2>Дані про потяги</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Напрямок</th>
+                <th>Тип вагона</th>
+                <th>Номери вагонів</th>
+                <th>Час</th>
+                <th>Виконавець</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="train : ${trains}">
+                <td th:text="${train.direction}"></td>
+                <td th:text="${train.wagonType}"></td>
+                <td th:text="${train.wagonNumbers}"></td>
+                <td th:text="${train.time}"></td>
+                <td th:text="${train.executor}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Повідомлення на завершення -->
+    <div class="footer">
+        <p>Дякуємо, що обираєте нашу залізницю! <br> Щасливої дороги!</p>
+    </div>
+</div>
+
+</body>
+</html>
